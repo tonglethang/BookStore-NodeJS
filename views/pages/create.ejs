@@ -1,0 +1,35 @@
+<!-- views/pages/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head.ejs') %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../partials/header.ejs') %>
+    </header>
+        <form class="create" method="post">
+            <input type="text" name="name" placeholder="name">
+            <input type="number" name="price" placeholder="price">
+            <input type="text" name="image" placeholder="image">
+            <input type="text" name="nhaxuatban" placeholder="nhaxuatban">
+            <input type="number" name="namxuatban" placeholder="namxuatban">
+            <input type="text" name="tacgia" placeholder="tacgian">
+            <input type="number" name="sotrang" placeholder="sotrang">
+            <input type="text" name="kichthuoc" placeholder="kichthuoc">
+            <input type="number" name="soluongbandau" placeholder="soluongbandau">
+            <input type="number" name="soluongcon" placeholder="soluongcon">
+            <textarea name="mota" placeholder="mota">
+
+            </textarea>
+            <button type="submit" name="submit">THem</button>
+        </form>
+    <footer>
+        <%- include('../partials/footer.ejs') %>
+    </footer>
+
+</body>
+</html>

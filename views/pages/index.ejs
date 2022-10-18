@@ -1,0 +1,40 @@
+<!-- views/pages/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head.ejs') %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../partials/header.ejs') %>
+    </header>
+
+        <h1><%= key %></h1>
+        <table>
+            <% for(var i=0; i < books.length; i++) { %>
+               <tr>
+                 <td><%= books[i].name %></td>
+                 <td><%= books[i].price %></td>
+                 <td><%= books[i].image %></td>
+                 <td><%= books[i].nhaxuatban %></td>
+                 <td><%= books[i].namxuatban %></td>
+                 <td><%= books[i].tacgia%></td>
+                 <td><%= books[i].sotrang%></td>
+                 <td><%= books[i].kichthuoc %></td>
+                 <td><%= books[i].soluongbandau%></td>
+                 <td><%= books[i].soluongcon %></td>
+                 <td><%= books[i].mota %></td>
+                 <td><a href="/updatebook/<%= books[i]._id %>">Update</a></td>
+                 <td><a href="/deletebook/<%= books[i]._id %>">Delete</a></td>
+               </tr>
+            <% } %>
+            </table>
+    <footer>
+        <%- include('../partials/footer.ejs') %>
+    </footer>
+
+</body>
+</html>

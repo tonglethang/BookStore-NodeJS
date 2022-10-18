@@ -1,0 +1,35 @@
+<!-- views/pages/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head.ejs') %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../partials/header.ejs') %>
+    </header>
+        <form class="update" method="post">
+            <input type="text" name="name" placeholder="name" value="<%= book.name %>">
+            <input type="number" name="price" placeholder="price" value="<%= book.price %>">
+            <input type="text" name="image" placeholder="image" value="<%= book.image %>">
+            <input type="text" name="nhaxuatban" placeholder="nhaxuatban" value="<%= book.nhaxuatban%>">
+            <input type="number" name="namxuatban" placeholder="namxuatban" value="<% book.namxuatban %> ">
+            <input type="text" name="tacgia" placeholder="tacgian" value="<%= book.tacgia %>">
+            <input type="number" name="sotrang" placeholder="sotrang" value="<%= book.sotrang %>">
+            <input type="text" name="kichthuoc" placeholder="kichthuoc" value="<%= book.kichthuoc %>">
+            <input type="number" name="soluongbandau" placeholder="soluongbandau" value="<%= book.soluongbandau %>">
+            <input type="number" name="soluongcon" placeholder="soluongcon" value="<%= book.soluongcon %>">
+            <textarea name="mota" placeholder="mota" >
+                <%= book.mota %>
+            </textarea>
+            <button type="submit" name="submit">THem</button>
+        </form>
+    <footer>
+        <%- include('../partials/footer.ejs') %>
+    </footer>
+
+</body>
+</html>
