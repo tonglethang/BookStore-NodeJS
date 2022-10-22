@@ -11,10 +11,9 @@
     <header>
         <%- include('../partials/header.ejs') %>
     </header>
-        <form class="create" method="post">
+        <form method="post" enctype="multipart/form-data" action="/createbook">
             <input type="text" name="name" placeholder="name">
             <input type="number" name="price" placeholder="price">
-            <input type="text" name="image" placeholder="image">
             <input type="text" name="nhaxuatban" placeholder="nhaxuatban">
             <input type="number" name="namxuatban" placeholder="namxuatban">
             <input type="text" name="tacgia" placeholder="tacgian">
@@ -22,9 +21,24 @@
             <input type="text" name="kichthuoc" placeholder="kichthuoc">
             <input type="number" name="soluongbandau" placeholder="soluongbandau">
             <input type="number" name="soluongcon" placeholder="soluongcon">
+            <!-- <input type="text" name="type" placeholder="type"> -->
+            <select name="type" required="true">
+                <option>--Chọn loại sách--</option>
+                <option value="1">Sách thiếu nhi</option>
+                <option value="2">Sách ngoại ngữ</option>
+                <option value="3">Sách nấu ăn</option>
+                <option value="4">Sách kinh tế</option>
+                <option value="5">Trinh thám</option>
+                <option value="6">Sách văn học</option>
+                <option value="7">Sách tâm lý-Kỹ năng sống</option>
+                <option value="8">Sách giáo khoa</option>
+                <option value="9">Từ điển</option>
+            </select>
+            <input type="number" name="sale" placeholder="sale">
             <textarea name="mota" placeholder="mota">
 
             </textarea>
+            <input type="file" name="image" />
             <button type="submit" name="submit">THem</button>
         </form>
     <footer>

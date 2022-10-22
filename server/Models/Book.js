@@ -13,8 +13,8 @@ const bookSchema = new mongoose.Schema({
     required: true,
   },
   image: {
-    type: String,
-    required: true,
+    data: String,
+    contentType: String,
   },
   nhaxuatban: {
     type: String,
@@ -44,9 +44,24 @@ const bookSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  mota: {
+  sale: {
+    type: Number,
+    required: true,
+  },
+  type: {
     type: String,
     required: true,
+  },
+  mota:{
+    type: String,
+    required: true,
+  },
+  time_create :{
+    type: Date,
+    required: true,
+  },
+  time_update: {
+    type: Date
   },
 });
 

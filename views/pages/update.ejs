@@ -11,13 +11,13 @@
     <header>
         <%- include('../partials/header.ejs') %>
     </header>
-        <form class="update" method="post">
+        <form class="update" method="post" enctype="multipart/form-data" >
             <input type="text" name="name" placeholder="name" value="<%= book.name %>">
             <input type="number" name="price" placeholder="price" value="<%= book.price %>">
-            <input type="text" name="image" placeholder="image" value="<%= book.image %>">
             <input type="text" name="nhaxuatban" placeholder="nhaxuatban" value="<%= book.nhaxuatban%>">
-            <input type="number" name="namxuatban" placeholder="namxuatban" value="<% book.namxuatban %> ">
+            <input type="number" name="namxuatban" placeholder="namxuatban" value="<%= book.namxuatban %>">
             <input type="text" name="tacgia" placeholder="tacgian" value="<%= book.tacgia %>">
+            <input type="text" name="type" placeholder="+type" value="<%= book.type %>">
             <input type="number" name="sotrang" placeholder="sotrang" value="<%= book.sotrang %>">
             <input type="text" name="kichthuoc" placeholder="kichthuoc" value="<%= book.kichthuoc %>">
             <input type="number" name="soluongbandau" placeholder="soluongbandau" value="<%= book.soluongbandau %>">
@@ -25,6 +25,8 @@
             <textarea name="mota" placeholder="mota" >
                 <%= book.mota %>
             </textarea>
+            <img src="/uploads/<%= book.image.data %> "/><br><br>
+            <label>New image: </label><input type="file" name="image" />
             <button type="submit" name="submit">THem</button>
         </form>
     <footer>

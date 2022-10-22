@@ -1,19 +1,51 @@
 <!-- views/partials/header.ejs -->
-
-<nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-                <span class="glyphicon glyphicon glyphicon-tree-deciduous"></span>
-                EJS Is Fun
-            </a>
-        </div>
-
-        <ul class="nav navbar-nav">
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-        </ul>
-
+<div class="header">
+    <div class="top-header">
+        <span class="info-header">
+            <a href="/hethong">Hệ thống cửa hàng</a>
+            <a href="/hotro">Liên hệ hỗ trợ</a>
+            <a href="/tuyendung">Tin tuyển dụng</a>
+        </span>
+        <span class="login-header">
+            <a href="/login">Đăng nhập</a>
+            <a href="/register">Đăng ký</a>
+        </span>
     </div>
-</nav>
+    <div class="main-header">
+        <div class="logo">
+            <a href="/">LTStore</a>
+        </div>
+        <div class="search-header">
+            <form class="form-search">
+                <input type="text" name="txtSearch" placeholder="Bạn muốn mua gì ?" />
+                <button type="submit" class="btnSearch">TÌM KIẾM</button>
+            </form>
+        </div>
+        <div class="cart-header">
+            <button type="button" class="btnCart">Giỏ hàng của bạn <i class="fa-solid fa-cart-shopping"></i></button>
+        </div>
+    </div>
+    <div class="menu-header">
+        <div class="list-product">
+            <ul>
+                <li></i><a style="color: #fff;" href="/"> <i style="color: #fff; margin-right:5px;" class="fa-solid fa-list"></i>Danh mục sản phẩm</a>
+                    <ul class="menu-drop-1">
+                        <li><a href="/">Sách tiếng việt <i class="fa-solid fa-angle-right"></i></a></li>
+                        <li><a href="/">Sách ngoại văn</a></li>
+                        <li><a href="/">Văn phòng phẩm <i class="fa-solid fa-angle-right"></i></a></li>
+                        <li><a href="/">Đồ trang trí- Lưu niệm</a></li>
+                        <li><a href="/">Đồ chơi <i class="fa-solid fa-angle-right"></i></a></li>
+                        <li><a href="/">Theo nhà cung cấp <i class="fa-solid fa-angle-right"></i></a></li>
+                    </ul>
+                </li>
+                <li><a href="/">Sách giáo khoa</a></li>
+                <li><a href="/">Sách thiếu nhi</a></li>
+                <li><a href="/">Sách văn học </a></li>
+                <li><a href="/">Trinh thám</a></li>
+                <li><a href="/">Văn phòng phẩm</a></li>
+                <div style="clear: both;"></div>
+            </ul>
+        </div>
+    </div>
+    
+</div>
