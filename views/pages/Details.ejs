@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/details.css">
+    <script type="module" src="/js/index.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://kit.fontawesome.com/6202e56613.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>document.addEventListener("touchstart", function(){}, true);</script>
+
+    <title ><%= book.name %></title>
+</head>
+
+<body>
+    <header>
+        <%- include('../partials/header.ejs') %>
+    </header>
+    <main>
+        <div class="content">
+            <div class="title-book">
+                <h6><a href="/">TRANG CHỦ </a> / <a href="/"><%= book.type %> </a> / <%= book.name %> </h6>
+            </div>
+            <div class="details-books">
+                <div class="image-book">
+                    <img src="/uploads/<%= book.image.data%> ">
+                </div>
+                <div class="info-book">
+                    <h3><%= book.name%></h3>
+                    <div class="name-book">Nhà xuất bản: <a  href="/" style="text-decoration: none;"><%= book.nhaxuatban%> </a>| Mã SP: <%= book._id%> </div>
+                    <div class="price-book">
+                        <% var price_discount = book.price - ((book.price / 100) * book.discount)
+                            var price_save = (book.price / 100) * book.discount
+                         function formatCash(cash) {
+                            return cash.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        } %> 
+                        <span class="price-book-discount"><%=formatCash(price_discount)%><u>đ</u></span>
+                        <span class="price-book-cost"><s><%=formatCash(book.price)%><u>đ</u></s></span>
+                        <span class="price-book-save">(Bạn đã tiết kiệm được: <%=formatCash(price_save)%><u>đ</u>)</span>
+                    </div>
+                    <div class="promotion">
+                        <h5>Khuyến mãi và ưu đãi tại <span>LT Store:</span> </h5>
+                        <ul>
+                            <li><span>Freeship tại Đà Nẵng</span> cho đơn hàng từ <span>500.000đ</span></li>
+                            <li><span>Freeship cho các tỉnh khác</span> cho đơn hàng từ <span>1.000.000đ</span></li>
+                        </ul>
+                    </div>
+                    <% if(book.soluongcon == 0){ %> 
+                    <div class="message_amount">Đã hết hàng. Vui lòng quay lại sau</div>
+                    <% }else {%> 
+                    <div class="quantity">
+                        <h5 style="font-weight: bold">Số lượng:</h5>
+                        <p>Còn <span style="font-weight: bold; color:#00ab9f"><%= book.soluongcon %></span> sản phẩm trong cửa hàng</p>
+                        <form >
+                            <button type="button" class="qtyminus" aria-hidden="true">&minus;</button>
+                            <input type="number" name="quantiy" id="qty" min="1" max="<%=book.soluongcon %>" step="1" value="1">
+                            <button type="button" class="qtyplus" aria-hidden="true">&plus;</button>
+                            <button type="submit">THÊM VÀO GIỎ HÀNG</button>
+                        </form>
+                    </div>
+                    <% } %>
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+            <div class="more-information">
+                <div class="tranfer-info">
+                    <button class="btn-describle">MÔ TẢ</button>
+                    <button type="button" class="btn-comment">BÌNH LUẬN</button>
+                </div>
+                <div class="describle">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td>Mã hàng: </td>
+                            <td><%= book._id %></td>
+                        </tr>
+                        <tr>
+                            <td>Loại sách: </td>
+                            <td><%= book.type %></td>
+                        </tr>
+                        <tr>
+                            <td>Nhà xuất bản: </td>
+                            <td><%= book.nhaxuatban %></td>
+                        </tr>
+                        <tr>
+                            <td>Tác giả: </td>
+                            <td><%= book.tacgia %></td>
+                        </tr>
+                        <tr>
+                            <td>Năm xuất bản: </td>
+                            <td><%= book.namxuatban %></td>
+                        </tr>
+                        <tr>
+                            <td>Số trang: </td>
+                            <td><%= book.sotrang %></td>
+                        </tr>
+                        <tr>
+                            <td>Kích thước: </td>
+                            <td><%= book.kichthuoc %></td>
+                        </tr>
+                    </table>
+                    <p><%= book.mota %></p>
+                </div>
+                <div class="comment" id="comment">
+                    <p>Có 10 bình luận</p>
+                    <div class="write-comment">
+                        <form>
+                            <textarea name="comment" placeholder="Viết bình luận..."></textarea>
+                            <button type="submit" class="btn-comment2">Đăng bình luận</button>
+                        </form>
+                    </div>
+                    <p>Các bình luận: </p>
+                    <div class="another-comment">
+                        <span class="name-comment">Lê Thắng: </span>
+                        <span class="time-comment">10-20-2000T20:00:00Z</span>
+                        <p class="content-comment">Sách rất hay</p>
+                    </div>
+                    <div class="another-comment">
+                        <span class="name-comment">Lê Thắng: </span>
+                        <span class="time-comment">10-20-2000T20:00:00Z</span>
+                        <p class="content-comment">Sách rất hay</p>
+                    </div>
+                    <div class="another-comment">
+                        <span class="name-comment">Lê Thắng: </span>
+                        <span class="time-comment">10-20-2000T20:00:00Z</span>
+                        <p class="content-comment">Sách rất hay</p>
+                    </div>
+                </div>
+            </div>
+            <div class="products-related">
+                <h5>SẢN PHẨM LIÊN QUAN</h5>
+                <% for( i=0; i < book_related.length; i++){ %> 
+                <div class="product-related">
+                    <a href="/details/<%=book_related[i]._id %> ">
+                        <div class="product-relate-image"><img src="/uploads/<%= book_related[i].image.data %>"  /></div>
+                        <div class="product-relate-name">
+                            <%= book_related[i].name  %> 
+                        </div>           
+                        <% var price_discount2 = book_related[i].price - ((book_related[i].price / 100) * book_related[i].discount) %>
+                        <% var price_save2 = (book_related[i].price / 100) * book_related[i].discount%>
+    
+                        <div class="product-relate-price">
+                            <span class="price-discount"><%=formatCash(price_discount2)%><u>đ</u></span>
+                            <span class="price-cost"><s><%=formatCash(book_related[i].price)%><u>đ</u></s> </span>
+                        </div>
+                        <div style="clear: both;"></div>
+                    </a>
+                </div>
+                <% } %> 
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+    </main>
+           
+    <footer>
+        <%- include('../partials/footer.ejs') %>
+    </footer>
+
+</body>
+</html>

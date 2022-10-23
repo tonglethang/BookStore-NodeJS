@@ -9,9 +9,10 @@ import path  from 'path';
 
 var db = mongoose.connection;
 
+
 export function getBooks(req, res, err){
-    var sortseller = {name: -1};
-    var sortsale = {sale: -1};
+    var sortseller = {price: -1};
+    var sortdiscount = {discount: -1};
     var time = new Date();
     console.log("timeee: " + time);
 
@@ -23,13 +24,13 @@ export function getBooks(req, res, err){
             });
             const newBook = allNewBook.slice(0,8);
             Book.find().sort(sortseller).limit(8)
-            .then((allSellerBook) => {
-                Book.find().sort(sortsale).limit(10)
-                    .then((saleBooks) => {
+            .then((allSellerBook) => {     
+                Book.find().sort(sortdiscount).limit(10)
+                    .then((discountBooks) => {
                         return res.render('pages/home',{
                             newbooks: newBook,
                             sellerbooks: allSellerBook,
-                            books: saleBooks
+                            books: discountBooks
                         })
                     })
                 

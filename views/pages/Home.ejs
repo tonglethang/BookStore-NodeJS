@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="css/home.css">
-    <script type="module" src="/js/index.js"></script>
+    <script type="module" src="../js/index.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://kit.fontawesome.com/6202e56613.js" crossorigin="anonymous"></script>
@@ -11,9 +11,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>document.addEventListener("touchstart", function(){}, true);</script>
+
+    <title>Trang chủ</title>
 </head>
 
-<body class="contain">
+<body>
 
     <header>
         <%- include('../partials/header.ejs') %>
@@ -69,19 +71,23 @@
                 </div>
                 <div class="products">
                     <% for(var i=0; i < sellerbooks.length; i++) { %>
-                    <!-- price saleoff -->
-                        <% var saleoff = sellerbooks[i].price - ((sellerbooks[i].price/ 100) * 10)%> 
-                    <!-- price saleoff -->
+                    <!-- price discount -->
+                        <% var price_discount1 = sellerbooks[i].price - ((sellerbooks[i].price/ 100) * sellerbooks[i].discount); %> 
+                        <%function formatCash(cash) {
+                            return cash.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        } 
+                        %>
+                    <!-- price discount -->
                     <div class="product">
-                        <a href="/">
-                            <div class="product-selloff"> <%= sellerbooks[i].sale%>%</div>
+                        <a href="/details/<%= sellerbooks[i]._id%>">
+                            <div class="product-selloff"> <%= sellerbooks[i].discount%>%</div>
                             <div class="img-product">
                                 <img src="/uploads/<%= sellerbooks[i].image.data %>">
                             </div>
                             <div class="product-name"> <%= sellerbooks[i].name%> </div>
                             <div class="product-price">
-                                <div class="product-price-selloff"> <%=saleoff%><u>đ</u></div>
-                                <div class="product-price-cost"> <s><%= sellerbooks[i].price %><u>đ</u></s></div>
+                                <div class="product-price-selloff"> <%=formatCash(price_discount1)%><u>đ</u></div>
+                                <div class="product-price-cost"> <s><%=formatCash(sellerbooks[i].price)%><u>đ</u></s></div>
                             </div>
                         </a>
                     </div>
@@ -102,19 +108,19 @@
                 </div>
                 <div class="products">
                     <% for(var i=0; i < newbooks.length; i++) { %>
-                        <!-- price saleoff -->
-                            <% var saleoff = newbooks[i].price - ((newbooks[i].price/ 100) * 10)%> 
-                        <!-- price saleoff -->
+                        <!-- price discount -->
+                            <% var pricediscount= newbooks[i].price - ((newbooks[i].price/ 100) * newbooks[i].discount); %> 
+                        <!-- price discount -->
                         <div class="product">
-                            <a href="/">
-                                <div class="product-selloff"> <%= newbooks[i].sale%>%</div>
+                            <a href="/details/<%= newbooks[i]._id%>">
+                                <div class="product-selloff"> <%= newbooks[i].discount%>%</div>
                                 <div class="img-product">
                                     <img src="/uploads/<%= newbooks[i].image.data %>">
                                 </div>
                                 <div class="product-name"> <%= newbooks[i].name%> </div>
                                 <div class="product-price">
-                                    <div class="product-price-selloff"> <%=saleoff%><u>đ</u></div>
-                                    <div class="product-price-cost"> <s><%= newbooks[i].price %><u>đ</u></s></div>
+                                    <div class="product-price-selloff"> <%=formatCash(pricediscount)%><u>đ</u></div>
+                                    <div class="product-price-cost"> <s><%= formatCash(newbooks[i].price) %><u>đ</u></s></div>
                                 </div>
                             </a>
                         </div>
@@ -188,19 +194,19 @@
                 <h4>SÁCH GIẢM GIÁ NHIỀU NHẤT</h4>
                 <div class="products"  style="width: 100%">
                     <% for(var i=0; i < books.length; i++) { %>
-                        <!-- price saleoff -->
-                            <% var saleoff =books[i].price - ((books[i].price/ 100) * 10)%> 
-                        <!-- price saleoff -->
+                        <!-- price discount -->
+                            <% var price_discount3 = books[i].price - ((books[i].price/ 100) * books[i].discount); %> 
+                                     <!-- price discount -->
                         <div class="product" style="width: 18.75%;">
-                            <a href="/">
-                                <div class="product-selloff"> <%= books[i].sale%>%</div>
+                            <a href="/details/<%= books[i]._id%>">
+                                <div class="product-selloff"> <%= books[i].discount%>%</div>
                                 <div class="img-product">
                                     <img src="/uploads/<%= books[i].image.data %>">
                                 </div>
                                 <div class="product-name"> <%= books[i].name%> </div>
                                 <div class="product-price">
-                                    <div class="product-price-selloff"> <%=saleoff%><u>đ</u></div>
-                                    <div class="product-price-cost"> <s><%= books[i].price %><u>đ</u></s></div>
+                                    <div class="product-price-selloff"> <%=formatCash(price_discount3)%><u>đ</u></div>
+                                    <div class="product-price-cost"> <s><%= formatCash(books[i].price) %><u>đ</u></s></div>
                                 </div>
                             </a>
                         </div>

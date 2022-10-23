@@ -44,7 +44,7 @@ const bookSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  sale: {
+  discount: {
     type: Number,
     required: true,
   },

@@ -50,6 +50,7 @@ function getTypeBook(value_type){
 // create new book
 export function createBook (req, res) {
     //set address book image
+    console.log("ssssssssssss: " +req.body.discount);
     var name_image;
     const Storage = multer.diskStorage({
         destination: dir,
@@ -61,7 +62,7 @@ export function createBook (req, res) {
     const upload = multer({
         storage: Storage,
     }).single('image')
-    // Upload image
+    // Upload book
     upload(req, res, (err)=>{
         if(err){
             console.log(err);
@@ -80,7 +81,7 @@ export function createBook (req, res) {
                 soluongbandau: req.body.soluongbandau,
                 soluongcon: req.body.soluongcon,
                 type: type,
-                sale: req.body.sale,
+                discount: req.body.discount,
                 mota: req.body.mota,
                 image:{
                     data: name_image,
@@ -181,7 +182,7 @@ export function updateBook(req, res) {
                 soluongbandau: req.body.soluongbandau,
                 soluongcon: req.body.soluongcon,
                 type: req.body.type,
-                sale: req.body.sale,
+                discount: req.body.discount,
                 mota: req.body.mota,
               
                 image:{

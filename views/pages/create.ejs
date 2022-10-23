@@ -9,7 +9,6 @@
 <body class="container">
 
     <header>
-        <%- include('../partials/header.ejs') %>
     </header>
         <form method="post" enctype="multipart/form-data" action="/createbook">
             <input type="text" name="name" placeholder="name">
@@ -34,7 +33,7 @@
                 <option value="8">Sách giáo khoa</option>
                 <option value="9">Từ điển</option>
             </select>
-            <input type="number" name="sale" placeholder="sale">
+            <input type="number" name="discount" placeholder="discount">
             <textarea name="mota" placeholder="mota">
 
             </textarea>
@@ -42,7 +41,6 @@
             <button type="submit" name="submit">THem</button>
         </form>
     <footer>
-        <%- include('../partials/footer.ejs') %>
     </footer>
 
 </body>
