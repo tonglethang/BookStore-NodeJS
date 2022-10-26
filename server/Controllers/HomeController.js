@@ -13,16 +13,14 @@ var db = mongoose.connection;
 export function getBooks(req, res, err){
     var sortseller = {price: -1};
     var sortdiscount = {discount: -1};
-    var time = new Date();
-    console.log("timeee: " + time);
 
     Book.find()
         .then((allNewBook) => { 
             //sort by date 
             allNewBook.sort(function(a,b){
-                return new Date(b.time_create) - new Date(a.time_create);
+                return new Date(a.time_create) - new Date(b.time_create);
             });
-            const newBook = allNewBook.slice(0,8);
+            var newBook = allNewBook.slice(0,8);
             Book.find().sort(sortseller).limit(8)
             .then((allSellerBook) => {     
                 Book.find().sort(sortdiscount).limit(10)

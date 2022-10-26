@@ -1,0 +1,71 @@
+main{
+    background-color: #fff;
+}
+.content{
+    margin-left: 10%;
+    margin-right: 8%;
+}
+.content h5{
+    text-transform: uppercase;
+    padding: 5px;    
+    padding-top: 10px;
+}
+.content h5 a{
+    text-decoration: none;
+    color: rgb(56, 56, 56);
+    transition: color 0.5s;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+
+.filter-price span{
+    width: 24.5%;
+    display: inline-block;
+}
+.filter-price label{
+    font-weight: normal;
+}
+.filter-price{
+    padding: 14px 0px 10px 20px;
+    border: 1px solid #dddddd;
+}
+
+.title-collections{
+    background-color:rgb(239, 239, 239);
+    padding: 6px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.title-collections h4{
+    font-weight: bold;
+    display: inline-block;
+    width: 75%;
+}
+.title-collections form{
+    width: 23%;
+    display: inline-block;
+} 
+.title-collections button{
+    padding: 0 8px 0 8px;
+    background-color:#00ab9f;
+    border: none;
+    color: #fff;
+}
+.product{
+    box-shadow: none;
+    transition: box-shadow 0.5s;
+}
+.products .product:hover{
+    box-shadow:inset 0px 0px 0px 1px #b8b8b8;
+    transition: box-shadow 0.5s;
+}
+.row{
+    text-align: center;
+}
+.row nav ul li a{
+    color: #00ab9f;
+}
+
+.page-link{
+    cursor: pointer;
+}

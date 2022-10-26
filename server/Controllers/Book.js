@@ -189,7 +189,7 @@ export function updateBook(req, res) {
                     data: name_image,
                     contentType: 'image/png' 
                 },
-                time_create: new Date().toLocaleString("en-US", {timeZone: "Asia/Jakarta"}),
+                time_update: new Date().toLocaleString("en-US", {timeZone: "Asia/Jakarta"}),
             });
             console.log("Upload image successfully");
 

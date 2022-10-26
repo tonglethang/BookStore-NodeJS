@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/collections.css" language="JavaScript">
+    <script type="module" src="/js/index.js"></script>
+    <script type="module" src="/js/collections.js"></script>
+    <script type="text/javascript" src="/js/pagination.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://kit.fontawesome.com/6202e56613.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+    document.addEventListener("touchstart", function(){}, true);
+
+    </script>
+
+    <title>Danh sách sản phẩm</title>
+
+</head>
+
+<body>
+
+    <header>
+        <%- include('../partials/header.ejs') %>
+    </header>
+
+    <main>
+        <div class="content">
+            <h5><a href="/">TRANG CHỦ </a> / <a href="/"> TẤT CẢ</a></h5> 
+            <div class="filter-price">
+                <form class="price">
+                    <span>
+                        <input type="radio" name="filter-price" value="all" checked/>
+                        <label  for="all">Tất cả</label>
+                    </span>
+                    <span>
+                        <input type="radio" name="filter-price" value ="1-100" />
+                        <label for="1-100">Nhỏ hơn 100,000đ</label>
+                    </span>
+                    <span>
+                        <input type="radio" name="filter-price" value="100-200" />
+                        <label for="100-200">Từ 100,000đ - 200,000đ</label>
+                    </span>
+                    <span> 
+                        <input type="radio" name="filter-price" value="200-300" />
+                        <label for="200-300">Từ 200,000đ - 300,000đ</label>
+                    </span>
+                    <span> 
+                        <input type="radio" name="filter-price" value="300-400" />
+                        <label for="300-400">Từ 300,000 - 400,000đ</label>
+                    </span>
+                    <span>
+                        <input type="radio" name="filter-price" value="400-500" />
+                        <label for="400-500">Từ 400,000đ - 500,000đ</label>
+                    </span>
+                    <span> 
+                        <input type="radio" name="filter-price" value="500" />
+                        <label for="500">Lớn hơn 500,000đ</label>
+                    </span>
+                </form>
+            </div>
+            <div class="title-collections">
+                <h4>TẤT CẢ SẢN PHẨM</h4>
+
+                <form method="get" action="/collections">
+                    <label for="sort_type">Sắp xếp:</label>
+                    <select name="sort_type" >
+                        <option value="1" <% if(filter== 1){%> selected <%} %> >Mới nhất</option>
+                        <option value="2" <% if(filter== 2){%> selected <%} %>>Cũ nhất</option>
+                        <option value="3" <% if(filter== 3){%> selected <%} %>>Sản phẩm bán chạy</option>
+                        <option value="4" <% if(filter== 4){%> selected <%} %>>Giá từ cao đến thấp</option>
+                        <option value="5" <% if(filter== 5){%> selected <%} %>>Giá từ thấp đến cao</option>
+                        <option value="6" <% if(filter== 6){%> selected <%} %>>Theo bảng chữ cái A-Z</option> 
+                        <option value="7" <% if(filter== 7){%> selected <%} %>>Theo bảng chữ cái Z-A</option> 
+                    </select>
+                    <button type="submit" class="btn-sort" >Lọc</button>
+                </form>
+            </div>
+            <div class="products"  style="width: 100%">
+                <% for(var i=0; i < books.length; i++) { %>
+                    <% var price_discount = books[i].price - ((books[i].price/ 100) * books[i].discount); %> 
+                    <%function formatCash(cash) {
+                        return cash.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    } 
+                    %>
+                    <div class="product" style="width: 18.75%;">
+                        <a href="/details/<%= books[i]._id%>">
+                            <div class="product-selloff"> <%= books[i].discount%>%</div>
+                            <div class="img-product">
+                                <img src="/uploads/<%= books[i].image.data %>">
+                            </div>
+                            <div class="product-name"> <%= books[i].name%> </div>
+                            <div class="product-price">
+                                <div class="price-none" id="price-none" style="display: none"><%= price_discount%> </div>
+                                <div class="product-price-selloff"> <span><%=formatCash(price_discount)%></span><u>đ</u></div>
+                                <div class="product-price-cost"> <s><%= formatCash(books[i].price) %><u>đ</u></s></div>
+                            </div>
+                        </a>
+                    </div>
+                <% } %>
+            </div>
+            <!-- Phân trang -->
+            <div class="row">
+                <!-- hiển thị phân trang nếu có trang -->
+                <% if(pages > 0) { %>
+                <nav class="mx-auto">
+                  <ul class="pagination">
+                    <!-- FIRST ITEM -->  
+                    <% if(current == 1) { %> 
+                        <li class="page-item disabled">
+                          <span class="page-link" >First</span>
+                        </li>
+                    <% } else { %>
+                        <li class="page-item">
+                          <span class="page-link" onclick="paginationUrl(1)">First</span>
+                        </li>
+                    <% } %>
+                    <!-- ITEMS  -->
+                    <% var i = (Number(current) > 3 ? Number(current) - 2 : 1) %> 
+                    <% if(i !== 1) { %>
+                        <li class="page-item disabled">
+                            <span class="page-link" href=".">...</span>
+                        </li>
+                    <% } %>
+                    <% for(; i <= (Number(current) + 2) && i <= pages; i++) { %>
+                      <% if(i == current) {  %>
+                        <li class="page-item active">
+                          <span class="page-link" id="page" onclick="paginationUrl(page)">
+                            <%= i %>
+                          </span>
+                        </li>
+                    <% } else { %>
+                        <li class="page-item">
+                            <span class="page-link"onclick="paginationUrl(<%= i %>)">
+                                <%= i %>
+                            </span>
+                        </li>
+                    <% } %>
+                    <% if (i == Number(current) + 2 && i < pages) { %>
+                        <li class="page-item disabled">
+                          <span class="page-link" >...</span>
+                        </li>
+                    <% } %>
+                    <% } %>
+                    <!-- LAST ITEM -->
+                    <% if(current == pages) { %> 
+                        <li class="page-item disabled">
+                          <a class="page-link" href="#">
+                            Last
+                          </a>
+                        </li>
+                    <% } else { %>
+                        <li class="page-item">
+                          <span class="page-link"onclick="paginationUrl(<%= pages %>)">
+                            Last
+                          </span>
+                        </li>
+                    <% } %>
+                  </ul>
+                </nav>
+                <% } %>
+              </div>
+        </div>
+    </main>
+       
+    <footer>
+        <%- include('../partials/footer.ejs') %>   
+    </footer>
+
+</body>
+</html>

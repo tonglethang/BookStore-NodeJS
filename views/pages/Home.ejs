@@ -109,7 +109,7 @@
                 <div class="products">
                     <% for(var i=0; i < newbooks.length; i++) { %>
                         <!-- price discount -->
-                            <% var pricediscount= newbooks[i].price - ((newbooks[i].price/ 100) * newbooks[i].discount); %> 
+                        <% var pricediscount= newbooks[i].price - ((newbooks[i].price/ 100) * newbooks[i].discount); %> 
                         <!-- price discount -->
                         <div class="product">
                             <a href="/details/<%= newbooks[i]._id%>">

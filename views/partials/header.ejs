@@ -16,8 +16,8 @@
             <a href="/">LTStore</a>
         </div>
         <div class="search-header">
-            <form class="form-search">
-                <input type="text" name="txtSearch" placeholder="Bạn muốn mua gì ?" />
+            <form method="get" action="/collections"  class="form-search" >
+                <input type="text" name="key" placeholder="Bạn muốn mua gì ?" >
                 <button type="submit" class="btnSearch">TÌM KIẾM</button>
             </form>
         </div>
@@ -38,11 +38,11 @@
                         <li><a href="/">Theo nhà cung cấp <i class="fa-solid fa-angle-right"></i></a></li>
                     </ul>
                 </li>
-                <li><a href="/">Sách giáo khoa</a></li>
+                <li><a href="/collections">Sách giáo khoa</a></li>
                 <li><a href="/">Sách thiếu nhi</a></li>
                 <li><a href="/">Sách văn học </a></li>
                 <li><a href="/">Trinh thám</a></li>
-                <li><a href="/">Văn phòng phẩm</a></li>
+                <li><a href="/collections">Tất cả sản phẩm</a></li>
                 <div style="clear: both;"></div>
             </ul>
         </div>
