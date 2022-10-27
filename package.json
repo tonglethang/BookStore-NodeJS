@@ -11,10 +11,10 @@
   "keywords": [
     "c"
   ],
-  
   "author": "lethang",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
     "cloudinary": "^1.32.0",
     "dotenv": "^16.0.3",
@@ -23,6 +23,7 @@
     "mongoose": "^6.6.5",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
+    "validator": "^13.7.0",
     "vue": "^3.2.41"
   },
   "devDependencies": {

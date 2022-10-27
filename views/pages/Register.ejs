@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/collections.css" >
+    <link rel="stylesheet" href="/css/register.css">
+    <script type="module" src="/js/register.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://kit.fontawesome.com/6202e56613.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+    document.addEventListener("touchstart", function(){}, true);
+    function justNumber(evt) {
+    var theEvent = evt || window.event;
+  
+    // Handle paste
+    if (theEvent.type === 'paste') {
+        key = event.clipboardData.getData('text/plain');
+    } else {
+    // Handle key press
+        var key = theEvent.keyCode || theEvent.which;
+        key = String.fromCharCode(key);
+    }
+    var regex = /[0-9]|\./;
+    if( !regex.test(key) ) {
+      theEvent.returnValue = false;
+      if(theEvent.preventDefault) theEvent.preventDefault();
+    }
+  }
+    </script>
+
+    <title>Đăng ký</title>
+
+</head>
+
+<body>
+
+    <header>
+        <%- include('../partials/header.ejs') %>
+    </header>
+
+    <main>
+        <div class="content">
+            <div class="title-register">
+                <h6>TRANG CHỦ / TẠO TÀI KHOẢN</h6>
+            </div> 
+            <div class="main-register">
+                <h4>TẠO TÀI KHOẢN</h4>
+
+                <form method="post" action="/account/register" id="frm_register">
+                    <input type="text" name="username" id="txtUsername" placeholder="Tên đăng nhập" <% if(data){ %> value="<%= data.username %>" <% } %> />
+                    <% if(error1){ %>
+                    <div class="err">
+                        <%= error1 %> 
+                    </div>
+                    <% } %> 
+                    <input type="text" name="fullname" id="txtFullname" placeholder="Họ tên"   <% if(data){ %> value="<%= data.fullname %>" <% } %> />
+                    <input type="text" name="email" placeholder="Email" id="newEmail"  <% if(data){ %> value="<%= data.email %>" <% } %>/>
+                    <div class="err_email success" >
+                        Email không đúng định dạng !
+                    </div>
+                    <% if(error2){ %>
+                        <div class="err">
+                            <%= error2 %> 
+                        </div>
+                        <% } %> 
+                    <input type="text" name="phonenumber" id="txtPhonenumber"  onkeypress='justNumber(event)' placeholder="Số điện thoại"   <% if(data){ %> value="<%= data.phonenumber%>"<% } %>/>
+                    <div class="err_phone success">
+                        Số điện thoại không đúng !
+                    </div>
+                   <% if(error3){ %>
+                    <div class="err">
+                        <%= error3 %> 
+                    </div>
+                    <% } %> 
+                    <input type="password" name="password" id="txtNewPassword" placeholder="Mật khẩu" />
+                    <div class="err_pass1">
+                        Mật khẩu tối thiểu 8 ký tự  !
+                     </div>
+                    <input type="password" name="repassword" id="txtConfirmPassword" placeholder="Nhập lại mật khẩu" />
+                    <div class="err_pass2">
+                        Mật khẩu không trùng khớp !
+                     </div>
+                    <button type="button" name="btnRegister" id="submit">Đăng ký</button>
+                    <button type="button" name="btnCancel" >Trở về</button>
+                </form>
+            </div>
+        </div>
+    </main>
+       
+    <footer>
+        <%- include('../partials/footer.ejs') %>   
+    </footer>
+
+</body>
+</html>

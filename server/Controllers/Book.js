@@ -50,7 +50,6 @@ function getTypeBook(value_type){
 // create new book
 export function createBook (req, res) {
     //set address book image
-    console.log("ssssssssssss: " +req.body.discount);
     var name_image;
     const Storage = multer.diskStorage({
         destination: dir,

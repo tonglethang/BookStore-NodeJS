@@ -3,6 +3,9 @@ import { createBook, getAllBook, getBook, updateBook, deleteBook } from '../Cont
 import { getBooks } from '../Controllers/HomeController.js'; 
 import { getBookDetails } from '../Controllers/DetailsController.js'
 import { getBooksCollections} from '../Controllers/CollectionsController.js';
+import { createUser} from '../Controllers/RegisterController.js'
+
+
 const router = express.Router();
 router.get('/createbook', (req, res) => {
     res.render('pages/create');
@@ -22,4 +25,14 @@ export default router;
 
 //Collections page
 router.get('/collections', getBooksCollections);
-// router.get('/collections/:page', getBooksCollections);
+
+//register
+router.get('/account/register', (req, res) => {
+    res.render('pages/Register', {
+        error1: null,
+        error2: null,
+        error3: null,
+        data: null
+    })
+})
+router.post('/account/register',  createUser)
