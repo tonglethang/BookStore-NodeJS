@@ -15,7 +15,8 @@ export  function createUser (req, res, err) {
                     data: data,
                     error1: "Tên đăng nhập đã tồn tại !",
                     error2: null,
-                    error3: null
+                    error3: null,
+                    sessionUser: req.session.userName
                 }) 
             }
             User.find({email: email})
@@ -34,7 +35,7 @@ export  function createUser (req, res, err) {
                             return res.render('pages/Register', { 
                                 data: data,
                                 error1: null,
-                                error3: "Email đã tồn tại !",
+                                error3: "Số điện thoại đã tồn tại !",
                                 error2: null,
                             }) 
                         }
@@ -43,6 +44,8 @@ export  function createUser (req, res, err) {
                         user.time_create = new Date();
                         const salt = await bcrypt.genSalt(10);
                         user.password = await bcrypt.hash(user.password, salt);
+
+                        req.session.userName = user.username;
                         return user.save().then(() => {
                             return res.redirect('/')
                         })
@@ -57,4 +60,42 @@ export  function createUser (req, res, err) {
                     })
                 })
         })
+}
+
+export function loginUser(req, res, next) {
+    if(req.session.userName) {
+        res.redirect("/");
+    }
+    else{
+        const user = {username: req.body.username, password: req.body.password}
+        try{
+            User.find({username: user.username})
+            .then( async (result) => {
+                console.log(result);
+                const salt = await bcrypt.genSalt(10);
+
+                if(result.length > 0 &&  bcrypt.compareSync(user.password, result[0].password)) {
+                    const user = result[0];
+                    req.session.userName = user.username;
+                    return res.redirect("/")
+                }
+                else{
+                    return res.render('pages/Login', {
+                        error: "Thông tin đăng nhập không chính xác !",
+                        sessionUser: req.session.userName,
+                    })
+                }
+            })
+        }
+        catch(err){
+            console.error(err);
+        }
+    }
+}
+
+export function logoutUser(req, res){
+    if(req.session.userName){
+        delete req.session.userName;
+        res.redirect('/');
+    }
 }

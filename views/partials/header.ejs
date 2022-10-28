@@ -1,4 +1,17 @@
 <!-- views/partials/header.ejs -->
+<div class="alert" id="alert_mess">
+    <span class="closebtn">&times;</span>  
+    <strong>Thông báo !</strong> Bạn cần đăng nhập để thực hiện chức năng này. <a href="/account/login">Đăng nhập</a>
+  </div>
+  <!--
+  <div class="alert warning">
+    <span class="closebtn">&times;</span>  
+    <strong>Warning!</strong> Indicates a warning that might need attention.
+  </div>
+   --> 
+  <script>
+  </script>
+  
 <div class="header">
     <div class="top-header">
         <span class="info-header">
@@ -6,10 +19,12 @@
             <a href="/hotro">Liên hệ hỗ trợ</a>
             <a href="/tuyendung">Tin tuyển dụng</a>
         </span>
+        <% if(!sessionUser){ %> 
         <span class="login-header">
             <a href="/account/login">Đăng nhập</a>
             <a href="/account/register">Đăng ký</a>
         </span>
+        <% } %> 
     </div>
     <div class="main-header">
         <div class="logo">
@@ -46,6 +61,19 @@
                 <div style="clear: both;"></div>
             </ul>
         </div>
+        
+        <% if(sessionUser) { %> 
+        <div class="account">
+            <h5> <i class="fa-regular fa-user"></i> <%= sessionUser  %> <i class="fa-solid fa-caret-down"></i></h5>
+            <ul class="account-list">
+                <li><a href="/">Lịch sử mua hàng</a></li>
+                <li><a href="/">Thông tin tài khoản</a></li>
+                <li><a href="/">Đổi mật khẩu</a></li>
+                <li><a href="/account/logout">Đăng xuất</a></li>
+            </ul>
+        </div>
+        <% } %> 
+        <div style="clear: both;"></div>
     </div>
     
 </div>

@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import path  from 'path';
 import mainRoutes from './server/Routes/Main.js';
+import session from 'express-session';
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -40,4 +41,15 @@ app.use('/css', express.static(__dirname + 'public/css'));
 app.use('/js', express.static(__dirname + 'public/js'));
 app.use('/img', express.static(__dirname + 'public/img'));
 app.set('view engine', 'ejs');
+app.use(
+  session({
+      name: 'SESSION_ID',      // cookie name stored in the web browser
+      secret: 'my_secret', 
+      resave: true,
+      saveUninitialized: true,    // helps to protect session
+      cookie: {
+          maxAge: 30 * 86400000, // 30 * (24 * 60 * 60 * 1000) = 30 * 86400000 => session is stored 30 days
+      }
+  })
+);
 app.use('/', mainRoutes);

@@ -28,7 +28,8 @@ export function getBooks(req, res, err){
                         return res.render('pages/home',{
                             newbooks: newBook,
                             sellerbooks: allSellerBook,
-                            books: discountBooks
+                            books: discountBooks,
+                            sessionUser: req.session.userName
                         })
                     })
                 

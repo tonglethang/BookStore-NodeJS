@@ -11,7 +11,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script>document.addEventListener("touchstart", function(){}, true);</script>
+    <script>document.addEventListener("touchstart", function(){}, true);
+    function alertMess(){
+        var alert_mess = document.getElementById("alert_mess");
+        alert_mess.style.opacity = "1"
+        alert_mess.style.display = "block"
+    }
+    </script>
 
     <title ><%= book.name %></title>
 </head>
@@ -59,7 +65,7 @@
                             <button type="button" class="qtyminus" aria-hidden="true">&minus;</button>
                             <input type="number" name="quantiy" id="qty" min="1" max="<%=book.soluongcon %>" step="1" value="1">
                             <button type="button" class="qtyplus" aria-hidden="true">&plus;</button>
-                            <button type="submit">THÊM VÀO GIỎ HÀNG</button>
+                            <button id="btnCart" <%if(!sessionUser){%> type="button" onclick="alertMess()" <% }else{ %>type="submit"<%}%> >THÊM VÀO GIỎ HÀNG</button>
                         </form>
                     </div>
                     <% } %>

@@ -103,7 +103,17 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-.quantity button[type="button"]{
+.quantity .qtyminus{
+    width: 3rem; height: 3.1rem;
+    color: #fff;
+    font-size: 20px;
+    background-color: transparent;
+    border: none;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: 25px;
+}
+.quantity .qtyplus{
     width: 3rem; height: 3.1rem;
     color: #fff;
     font-size: 20px;
@@ -116,7 +126,7 @@ input::-webkit-inner-spin-button {
 .quantity button:hover{
     color: #00ab9f;
 }
-.quantity button[type="submit"]{
+.quantity #btnCart{
     margin-top: 15px;
     display: block;
     width: fit-content;

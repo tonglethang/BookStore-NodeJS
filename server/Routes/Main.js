@@ -3,7 +3,7 @@ import { createBook, getAllBook, getBook, updateBook, deleteBook } from '../Cont
 import { getBooks } from '../Controllers/HomeController.js'; 
 import { getBookDetails } from '../Controllers/DetailsController.js'
 import { getBooksCollections} from '../Controllers/CollectionsController.js';
-import { createUser} from '../Controllers/RegisterController.js'
+import { createUser,loginUser, logoutUser} from '../Controllers/UserController.js'
 
 
 const router = express.Router();
@@ -32,7 +32,19 @@ router.get('/account/register', (req, res) => {
         error1: null,
         error2: null,
         error3: null,
-        data: null
+        data: null,
+        sessionUser: req.session.userName,
     })
 })
-router.post('/account/register',  createUser)
+router.post('/account/register',  createUser);
+
+//login user
+router.get('/account/login', (req, res) =>{
+    delete req.session.userName;
+    res.render('pages/Login', {
+        error: null,
+        sessionUser: req.session.userName,
+    })
+})
+router.get('/account/logout', logoutUser);
+router.post('/account/login', loginUser);

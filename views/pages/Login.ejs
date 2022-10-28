@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/collections.css" >
+    <link rel="stylesheet" href="/css/register.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://kit.fontawesome.com/6202e56613.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+    document.addEventListener("touchstart", function(){}, true);
+    </script>
+
+    <title>Đăng nhập</title>
+
+</head>
+
+<body>
+
+    <header>
+        <%- include('../partials/header.ejs') %>
+    </header>
+
+    <main>
+        <div class="content">
+            <div class="title-register">
+                <h6>TRANG CHỦ / ĐĂNG NHẬP</h6>
+            </div> 
+            <div class="main-register">
+                <h4>ĐĂNG NHẬP</h4>
+
+                <form method="post" action="/account/login" id="frm_register">
+                    <input type="text" name="username" id="txtUsername" placeholder="Tên đăng nhập" />
+                    <input type="password" name="password" id="txtNewPassword" placeholder="Mật khẩu" />
+                    <% if(error){ %>
+                        <div class="err">
+                            <%= error %> 
+                        </div>
+                        <% } %> 
+                        <p style="padding: 5px">Bạn chưa có tài khoản ? <a href="/account/register">Đăng ký</a></p>
+                    <button type="submit" name="btnRegister" id="submit">Đăng nhập</button>
+                    <button type="button" name="btnCancel" >Trở về</button>
+                </form>
+            </div>
+        </div>
+    </main>
+       
+    <footer>
+        <%- include('../partials/footer.ejs') %>   
+    </footer>
+
+</body>
+</html>

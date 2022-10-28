@@ -1,5 +1,19 @@
 
+var close = document.getElementsByClassName("closebtn");
+var i;
 
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function(){
+    var div = this.parentElement;
+    div.style.opacity = "0";
+    setTimeout(function(){ div.style.display = "none"; }, 600);
+  }
+}
+function alertMess(){
+	var alert_mess = document.getElementById("alert_mess");
+	alert_mess.style.opacity = "1"
+	alert_mess.style.display = "block"
+}
 //add envent scroll top web
 let top= document.querySelector('#top');
 top.addEventListener('click', topFunction);

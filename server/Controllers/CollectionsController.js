@@ -19,12 +19,12 @@ export function getBooksCollections(req, res, err){
                 Book.countDocuments((err, count) => {
                     getSort(sort, allBooks);
                     var books = allBooks.slice((perPage * page)- perPage, perPage *page );
-                    console.log(books);
                     return res.render('pages/collections', { 
                         current: page, // page hiện tại
                         pages: Math.ceil(count/ perPage), // tổng số các page
                         books: books,
-                        filter: sort
+                        filter: sort,
+                        sessionUser: req.session.userName
                     })
                 })
             })
@@ -45,7 +45,8 @@ export function getBooksCollections(req, res, err){
                 current: page, // page hiện tại
                 pages: Math.ceil(count/ perPage), // tổng số các page
                 books: books,
-                filter: sort
+                filter: sort,
+                sessionUser: req.session.userName
             })
 
         })

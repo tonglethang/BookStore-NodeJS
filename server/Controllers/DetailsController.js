@@ -11,7 +11,8 @@ export function  getBookDetails(req, res, err){
                     const book_related2 = book_related.filter((item) => item.id !== id);
                     return res.render('pages/Details', {
                         book: book,
-                        book_related: book_related2
+                        book_related: book_related2,
+                        sessionUser: req.session.userName
                     })
                 });
         })
