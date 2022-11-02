@@ -1,8 +1,28 @@
 <!-- views/partials/header.ejs -->
+<script>
+    function alertMess(){
+        var alert_mess = document.getElementById("alert_mess");
+        alert_mess.style.opacity = "1"
+        alert_mess.style.display = "block"
+    }
+</script>
 <div class="alert" id="alert_mess">
     <span class="closebtn">&times;</span>  
     <strong>Thông báo !</strong> Bạn cần đăng nhập để thực hiện chức năng này. <a href="/account/login">Đăng nhập</a>
   </div>
+  <% if(locals.error_messages.length > 0) {%> 
+    <div class="alert" id="alert_mess" style="display:block; opacity:1">
+        <span class="closebtn">&times;</span>  
+        <strong>Thông báo !</strong>  <%= error_messages%>
+      </div>
+      <% } %> 
+  <% if(locals.success_messages.length > 0) {%> 
+  <div class="alert successCart" id="alert_mess" style="display:block; opacity:1">
+    <span class="closebtn">&times;</span>  
+    <strong>Thông báo !</strong> <%= success_messages%> 
+  </div>
+  <% } %> 
+  
   <!--
   <div class="alert warning">
     <span class="closebtn">&times;</span>  
@@ -37,7 +57,7 @@
             </form>
         </div>
         <div class="cart-header">
-            <button type="button" class="btnCart">Giỏ hàng của bạn <i class="fa-solid fa-cart-shopping"></i></button>
+            <button onclick="window.location.href='/cart';"  class="btnCart">Giỏ hàng của bạn<i class="fa-solid fa-cart-shopping"></i></button>
         </div>
     </div>
     <div class="menu-header">
@@ -67,8 +87,7 @@
             <h5> <i class="fa-regular fa-user"></i> <%= sessionUser  %> <i class="fa-solid fa-caret-down"></i></h5>
             <ul class="account-list">
                 <li><a href="/">Lịch sử mua hàng</a></li>
-                <li><a href="/">Thông tin tài khoản</a></li>
-                <li><a href="/">Đổi mật khẩu</a></li>
+                <li><a href="/account/changepass">Đổi mật khẩu</a></li>
                 <li><a href="/account/logout">Đăng xuất</a></li>
             </ul>
         </div>

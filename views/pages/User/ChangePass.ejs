@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head.ejs') %>
+    <link rel="stylesheet" href="/css/collections.css" >
+    <link rel="stylesheet" href="/css/register.css">
+    <script type="module" src="/js/editprofile.js"></script>
+    <script>
+        function checkPasswordLength() {
+            var password = $('input[name=password]').val();
+            if (password.length  < 8){
+                $(".err_pass1").removeClass('success');
+                $(".err_pass1").addClass('err_regis');
+            }
+            else{
+                $(".err_pass1").addClass("success");
+            }
+        }
+        function checkPasswordMatch() {
+            var password = $('input[name=password]').val();
+            var confirmPassword = $('input[name=repassword]').val();
+            if (password != confirmPassword ){
+                $(".err_pass2").removeClass('success');
+                $(".err_pass2").addClass('err_regis');
+            }
+            else{
+                $(".err_pass2").addClass("success");
+            }
+        }
+        function checkPassSuccess(){
+            if($(".err_pass1").hasClass('success') &&  $(".err_pass2").hasClass('success')) {
+                $('#submit').removeAttr("type").attr("type", "submit");
+            }
+            else{
+                $('#submit').removeAttr("type").attr("type", "button");
+            }
+        }
+        $(document).ready(function () {
+            $("#txtNewPassword").keyup(checkPasswordLength);
+            $("#txtConfirmPassword").keyup(checkPasswordMatch);
+            $("#txtNewPassword ,#txtConfirmPassword").keyup(checkPassSuccess);
+        })
+    </script>
+
+    <title>Đổi mật khẩu</title>
+
+</head>
+
+<body>
+
+    <header>
+        <%- include('partials/header.ejs') %>
+    </header>
+
+    <main>
+        <div class="content">
+            <div class="title-register">
+                <h6>TRANG CHỦ / ĐỔI MẬT KHẨU</h6>
+            </div> 
+            <div class="main-register">
+                <h4>ĐỔI MẬT KHẨU </h4>
+
+                <form method="post" action="/account/changepass" id="frm_register">
+                    <input type="password" name="password_old" id="txtOldPassword" placeholder="Nhập mật khẩu cũ" />
+                    <% if(error){ %>
+                        <div class="err">
+                            <%= error %> 
+                        </div>
+                        <% } %> 
+                    <input type="password" name="password" id="txtNewPassword" placeholder="Mật khẩu mới" />
+                    <div class="err_pass1">
+                        Mật khẩu tối thiểu 8 ký tự  !
+                     </div>
+                    <input type="password" name="repassword" id="txtConfirmPassword" placeholder="Nhập lại mật khẩu" />
+                    <div class="err_pass2">
+                        Mật khẩu không trùng khớp !
+                     </div>
+                    <button type="button" name="btnEdit" id="submit" >Xác nhận </button>
+                    <button type="button" name="btnCancel" onclick="history.back()" >Trở về</button>
+                </form>
+            </div>
+        </div>
+    </main>
+       
+    <footer>
+        <%- include('partials/footer.ejs') %>   
+    </footer>
+
+</body>
+</html>

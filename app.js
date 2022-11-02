@@ -7,6 +7,7 @@ import { dirname } from 'path';
 import path  from 'path';
 import mainRoutes from './server/Routes/Main.js';
 import session from 'express-session';
+import flash from 'connect-flash';
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -14,7 +15,7 @@ const __dirname = dirname(__filename);
 const DB_URL = "mongodb://localhost:27017/BookStore";
 const app = express();
 const port = 5035;
-const dir = path.join(__dirname, '/uploads');
+const dir = path.join(__dirname, 'public/uploads');
 // set up dependencies
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -40,6 +41,7 @@ app.use('/uploads',express.static(dir));
 app.use('/css', express.static(__dirname + 'public/css'));
 app.use('/js', express.static(__dirname + 'public/js'));
 app.use('/img', express.static(__dirname + 'public/img'));
+app.set('views', [path.join(__dirname, 'views'), path.join(__dirname, 'pages/User')]);
 app.set('view engine', 'ejs');
 app.use(
   session({
@@ -52,4 +54,5 @@ app.use(
       }
   })
 );
+app.use(flash());
 app.use('/', mainRoutes);

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head.ejs') %>
+    <link rel="stylesheet" href="/css/collections.css" language="JavaScript">
+    <link rel="stylesheet" href="../css/cart.css">
+    <script type="module" src="/js/index.js"></script>
+    <script type="text/javascript" src="/js/cart.js"></script>
+    <script type="module" src="/js/collections.js"></script>
+    <script type="text/javascript" src="/js/pagination.js"></script>
+    </script>
+
+    <title>Giỏ hàng</title>
+
+</head>
+
+<body>
+
+    <header>
+        <%- include('partials/header.ejs') %>
+    </header>
+
+    <main>
+        <div class="content">
+            <h5><a href="/">TRANG CHỦ </a> / <a href="/"> GIỎ HÀNG</a></h5> 
+            <div class="title-collections">
+                <h4>GIỎ HÀNG</h4>
+            </div>
+            <div class="content-cart">
+                <form>
+                    <table>
+                        <tr>
+                            <th colspan="2">Thông tin chi tiết sản phẩm</th>
+                            <th>Đơn giá</th>
+                            <th>Số lượng</th>
+                            <th>Tổng giá</th>
+                        </tr>
+                        <% function formatCash(cash) {
+                                return cash.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");}
+                            var total_price = 0;
+                            for(var i=0; i < carts.length; i++){ 
+                                 total_price += carts[i].total_price;
+                            %> 
+                        <tr>
+                            <td>
+                                <span class="btn-delete" ><button type="button" onclick="window.location.href='/cart/delete?id=<%=carts[i]._id%>'">X</button></span>
+                                <img src='../uploads/<%= carts[i].image  %> '/>
+                            </td>
+                            <td><%= carts[i].nameBook %> </td>
+                            <td style="color:#00ab9f; font-weight:bold;font-size: 18px" ><%= formatCash(carts[i].price) %> <u>đ</u></td>
+                            <td>
+                                <button type="button" class="qtyminus"onclick="minus(<%=i%>)" aria-hidden="true">&minus;</button>
+                                <input type="number" name="quantity" class="qty" min="1" max="<%= carts[i].max_quan %>" step="1" value="<%=carts[i].quantity%>" disabled="disabled">
+                                <input class="max_quan" type="hidden" value="<%=carts[i].max_quan%>"/>
+                                <button type="button" class="qtyplus"onclick="plus(<%=i%>)"aria-hidden="true">&plus;</button>
+                            </td>
+                            <td style="color:#00ab9f; font-weight: bold; font-size: 18px"><%= formatCash(carts[i].total_price)%><u>đ</u></td>
+                        </tr>
+                        <% } %> 
+                    </table>
+                    <div class="results-cart">
+                        <div class="totals-price">
+                            Tổng tiền đơn hàng: <span><%= formatCash(total_price)%><u>đ</u></span>
+                        </div>
+                        <div class="btn-cart">
+                            <button type="button" onclick="Redirect()"class="btn" >Cập nhật</button>
+                            <button type="submit" class="btn" >Thanh toán</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+       
+    <footer>
+        <%- include('partials/footer.ejs') %>   
+    </footer>
+
+</body>
+</html>

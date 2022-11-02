@@ -1,17 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="../css/home.css">
+    <%- include('partials/head.ejs') %>
     <link rel="stylesheet" href="../css/details.css">
     <script type="module" src="/js/index.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <script src="https://kit.fontawesome.com/6202e56613.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script>document.addEventListener("touchstart", function(){}, true);
+    <script>
     function alertMess(){
         var alert_mess = document.getElementById("alert_mess");
         alert_mess.style.opacity = "1"
@@ -61,9 +54,9 @@
                     <div class="quantity">
                         <h5 style="font-weight: bold">Số lượng:</h5>
                         <p>Còn <span style="font-weight: bold; color:#00ab9f"><%= book.soluongcon %></span> sản phẩm trong cửa hàng</p>
-                        <form >
+                        <form  action="/cart/<%= book._id%>" method="post">
                             <button type="button" class="qtyminus" aria-hidden="true">&minus;</button>
-                            <input type="number" name="quantiy" id="qty" min="1" max="<%=book.soluongcon %>" step="1" value="1">
+                            <input type="number" name="quantity" id="qty" min="1" max="<%=book.soluongcon %>" step="1" value="1">
                             <button type="button" class="qtyplus" aria-hidden="true">&plus;</button>
                             <button id="btnCart" <%if(!sessionUser){%> type="button" onclick="alertMess()" <% }else{ %>type="submit"<%}%> >THÊM VÀO GIỎ HÀNG</button>
                         </form>

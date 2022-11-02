@@ -5,48 +5,10 @@ import fs from 'fs';
 import mongo from 'mongodb';
 import path  from 'path';
 
-const dir = path.join('uploads');
+const dir = path.join('public/uploads');
 //connect mongodb
 var db = mongoose.connection;
 
-
-//get type book
-function getTypeBook(value_type){
-    var type;
-    switch(value_type){
-        case '1': 
-            type = "Sách thiếu nhi";
-            break;
-        case '2':
-            type = "Sách ngoại ngữ";
-            break;
-        case '3':
-            type = "Sách nấu ăn";
-            break;
-        case '4':
-            type = "Sách kinh tế";
-            break;  
-        case '5':
-            type = "Trinh thám";
-            break;
-        case '6':
-            type = "Sách văn học";
-            break;
-        case '7':
-            type = "Sách tâm lý-Kỹ năng sống";
-            break;
-        case '8':
-            type = "Sách giáo khoa";
-            break;
-        case '9':
-            type = "Từ điển";
-            break;
-        default:
-            type = "Lọai khác";
-            break;
-    }
-    return type;
-}
 // create new book
 export function createBook (req, res) {
     //set address book image
@@ -111,7 +73,7 @@ export function createBook (req, res) {
 export function getAllBook(req, res){
     Book.find()
         .then((allBook) => {
-            return res.render('pages/index',{
+            return res.render('admin/index',{
                 books: allBook,
             })
         })
@@ -127,7 +89,7 @@ export function getBook(req, res) {
     const id = req.params.id;
     Book.findById(id)
         .then((Book) => {
-            return res.render('pages/update',{
+            return res.render('admin/update',{
                 book: Book,
             })
         })
@@ -146,7 +108,7 @@ export function updateBook(req, res) {
 
     db.collection("books").find(query).toArray(function(err, result) {
         if (err) throw err;
-        var filePath = 'uploads/' + result[0].image.data;
+        var filePath = 'public/uploads/' + result[0].image.data;
         console.log(filePath);
         fs.unlinkSync(filePath);
     });
@@ -217,3 +179,40 @@ export function deleteBook(req, res) {
         }));
 }
 
+//get type book
+function getTypeBook(value_type){
+    var type;
+    switch(value_type){
+        case '1': 
+            type = "Sách thiếu nhi";
+            break;
+        case '2':
+            type = "Sách ngoại ngữ";
+            break;
+        case '3':
+            type = "Sách nấu ăn";
+            break;
+        case '4':
+            type = "Sách kinh tế";
+            break;  
+        case '5':
+            type = "Trinh thám";
+            break;
+        case '6':
+            type = "Sách văn học";
+            break;
+        case '7':
+            type = "Sách tâm lý-Kỹ năng sống";
+            break;
+        case '8':
+            type = "Sách giáo khoa";
+            break;
+        case '9':
+            type = "Từ điển";
+            break;
+        default:
+            type = "Lọai khác";
+            break;
+    }
+    return type;
+}

@@ -1,20 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="/css/home.css">
+    <%- include('partials/head.ejs') %>
     <link rel="stylesheet" href="/css/collections.css" >
     <link rel="stylesheet" href="/css/register.css">
     <script type="module" src="/js/register.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <script src="https://kit.fontawesome.com/6202e56613.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>
-    document.addEventListener("touchstart", function(){}, true);
     function justNumber(evt) {
     var theEvent = evt || window.event;
   
@@ -41,7 +32,7 @@
 <body>
 
     <header>
-        <%- include('../partials/header.ejs') %>
+        <%- include('partials/header.ejs') %>
     </header>
 
     <main>
@@ -87,14 +78,14 @@
                         Mật khẩu không trùng khớp !
                      </div>
                     <button type="button" name="btnRegister" id="submit">Đăng ký</button>
-                    <button type="button" name="btnCancel" >Trở về</button>
+                    <button type="button" name="btnCancel" onclick="history.back()">Trở về</button>
                 </form>
             </div>
         </div>
     </main>
        
     <footer>
-        <%- include('../partials/footer.ejs') %>   
+        <%- include('partials/footer.ejs') %>   
     </footer>
 
 </body>

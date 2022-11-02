@@ -1,54 +1,56 @@
 
-import mongoose from 'mongoose';
 import Book from '../Models/Book.js';
-import multer from 'multer';
-import fs from 'fs';
-import regex from 'mongodb';
-import path  from 'path';
-import { get } from 'http';
 
-var db = mongoose.connection;
+
 export function getBooksCollections(req, res, err){
-    let perPage = 20;
-    let page = req.query.page || 1;
-    var key = req.query.key || null;
-    var sort = req.query.sort_type || null;
-    if(key == null){
-        Book.find()
-            .then((allBooks) => {
-                Book.countDocuments((err, count) => {
-                    getSort(sort, allBooks);
-                    var books = allBooks.slice((perPage * page)- perPage, perPage *page );
-                    return res.render('pages/collections', { 
-                        current: page, // page hiện tại
-                        pages: Math.ceil(count/ perPage), // tổng số các page
-                        books: books,
-                        filter: sort,
-                        sessionUser: req.session.userName
+    try{
+        let perPage = 20;
+        let page = req.query.page || 1;
+        var key = req.query.key || null;
+        var sort = req.query.sort_type || null;
+        if(key == null){
+            Book.find()
+                .then((allBooks) => {
+                    Book.countDocuments((count) => {
+                        getSort(sort, allBooks);
+                        var books = allBooks.slice((perPage * page)- perPage, perPage *page );
+                        return res.render('pages/collections', { 
+                            current: page, // page hiện tại
+                            pages: Math.ceil(count/ perPage), // tổng số các page
+                            books: books,
+                            filter: sort,
+                        })
                     })
                 })
-            })
-            .catch((err) => {
-                res.status(500).json({
-                success: false,
-                message: 'Server error . Please try again.',
-                error: err.message,
-                });
-            })
-    }
-    else{
-        Book.find({"name":  new RegExp(key ,"i")})
-        .then((allBooks) => {
-            var count = allBooks.length
-            var books = allBooks.slice((perPage * page)- perPage, perPage *page );
-            return res.render("pages/collections", {
-                current: page, // page hiện tại
-                pages: Math.ceil(count/ perPage), // tổng số các page
-                books: books,
-                filter: sort,
-                sessionUser: req.session.userName
-            })
+                .catch((err) => {
+                    res.status(500).json({
+                    success: false,
+                    message: 'Server error . Please try again.',
+                    error: err.message,
+                    });
+                })
+        }
+        else{
+            Book.find({"name":  new RegExp(key ,"i")})
+            .then((allBooks) => {
+                var count = allBooks.length
+                var books = allBooks.slice((perPage * page)- perPage, perPage *page );
+                return res.render("pages/collections", {
+                    current: page, // page hiện tại
+                    pages: Math.ceil(count/ perPage), // tổng số các page
+                    books: books,
+                    filter: sort,
+                    sessionUser: req.session.userName
+                })
 
+            })
+        }
+    }
+    catch(err){
+        res.status(500).json({
+            success: false,
+            message: 'Server error. Please try again.',
+            error: err.message,
         })
     }
 }
